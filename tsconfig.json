@@ -30,7 +30,9 @@
       "@shared/*": [
         "src/app/shared/*"
       ],
-
+      "@data/*": [
+        "src/app/data/*"
+      ],
     },
     "lib": [
       "ES2022",
