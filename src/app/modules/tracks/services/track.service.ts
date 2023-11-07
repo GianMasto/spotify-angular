@@ -1,36 +1,47 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { environment } from '@env/environment';
 import { Observable, of } from 'rxjs';
-import * as dataRaw from '@data/tracks.json';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TrackService {
-  dataTracksTrending$: Observable<TrackModel[]> = of([]);
-  dataTracksRandom$: Observable<TrackModel[]> = of();
+  private readonly URL = environment.api;
+  private readonly token = environment.token;
 
-  constructor() {
-    const { data }: any = (dataRaw as any).default;
-
-    this.dataTracksTrending$ = of(data);
-    this.dataTracksRandom$ = new Observable((observer) => {
-      const trackExample: TrackModel = {
-        _id: 3,
-        name: 'Calypso (Original Mix)',
-        album: 'Round Table Knights',
-        cover:
-          'https://cdns-images.dzcdn.net/images/cover/1db3f8f185e68f26feaf0b9d72ff1645/350x350.jpg',
-        artist: {
-          name: 'Round Table Knights',
-          nickname: 'Round Table Knights',
-          nationality: 'US',
-        },
-        url: 'http://localhost:3000/track-2.mp3',
-      };
-      setTimeout(() => {
-        observer.next([trackExample]);
-      }, 3000);
+  private skipTrackById(
+    trackArr: TrackModel[],
+    _id: Number
+  ): Promise<TrackModel[]> {
+    return new Promise((resolve, reject) => {
+      const tmpArr = trackArr.filter((el) => el._id !== _id);
+      resolve(tmpArr);
     });
+  }
+
+  constructor(private http: HttpClient) {}
+
+  getAllTracks$(): Observable<any> {
+    return this.http
+      .get(`${this.URL}/api/1.0/tracks`, {
+        headers: new HttpHeaders().set('authorization', `Bearer ${this.token}`),
+      })
+      .pipe(map(({ data }: any) => data));
+  }
+
+  getAllRandom$(): Observable<any> {
+    return this.http
+      .get(`${this.URL}/api/1.0/tracks`, {
+        headers: new HttpHeaders().set('authorization', `Bearer ${this.token}`),
+      })
+      .pipe(
+        mergeMap(({ data }: any) => this.skipTrackById(data, 1)),
+        catchError((err) => {
+          return of([]);
+        })
+      );
   }
 }
