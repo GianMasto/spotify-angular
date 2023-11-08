@@ -23,7 +23,6 @@ export class TracksPageComponent implements OnInit, OnDestroy {
 
   loadData(): void {
     this._trackService.getAllTracks$().subscribe((data: TrackModel[]) => {
-      console.log('data from api', data);
       this.tracksTrending = data;
     });
   }
