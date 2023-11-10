@@ -36,7 +36,7 @@ export class LoginPageComponent implements OnInit {
       if (res.statusCode === 400) return (this.sessionError = true);
 
       this.sessionError = false;
-      this.cookie.set('token', res.tokenSession, 4, '/');
+      this.cookie.set('token', res.tokenSession, 1, '/');
 
       return this.router.navigate(['/', 'tracks']);
     });

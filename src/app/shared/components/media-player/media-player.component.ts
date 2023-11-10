@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
 import { MultimediaService } from '@shared/services/multimedia.service';
 import { Subscription } from 'rxjs';
@@ -9,35 +15,28 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./media-player.component.css'],
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  mockCover: TrackModel = {
-    _id: 2,
-    name: 'Snow Tha Product || BZRP Music Sessions #39',
-    album: 'BZRP Music Sessions',
-    cover:
-      'https://is5-ssl.mzstatic.com/image/thumb/Features125/v4/9c/b9/d0/9cb9d017-fcf6-28c6-81d0-e9ac5b0f359e/pr_source.png/800x800cc.jpg',
-    artist: {
-      name: 'Snow',
-      nickname: 'Snow',
-      nationality: 'US',
-    },
-    url: 'http://localhost:3000/track-1.mp3',
-  };
-
+  @ViewChild('progressBar') progressBar: ElementRef = new ElementRef('');
   observersList: Subscription[] = [];
 
-  constructor(private _multimediaService: MultimediaService) {}
+  state = 'paused';
+
+  constructor(public _multimediaService: MultimediaService) {}
+
+  handlePosition(e: MouseEvent): void {
+    const elNative: HTMLElement = this.progressBar.nativeElement;
+    const { clientX } = e;
+    const { x, width } = elNative.getBoundingClientRect();
+    const clickX = clientX - x;
+    const percentageFromX = (clickX / width) * 100;
+    this._multimediaService.seekAudio(percentageFromX);
+  }
 
   ngOnInit(): void {
-    // const observer1$: Subscription = this._multimediaService.callback.subscribe(
-    //   (response: TrackModel) => {}
-    // );
-    // this.observersList.push(observer1$);
+    const observer1$ = this._multimediaService.playerStatus$.subscribe(
+      (status) => (this.state = status)
+    );
 
-    const observable1$ = this._multimediaService.myObservable1$.subscribe({
-      next: (res) => console.log('ok', res),
-      error: (e) => console.error('error', e),
-    });
-    this.observersList.push(observable1$);
+    this.observersList.push(observer1$);
   }
 
   ngOnDestroy(): void {
