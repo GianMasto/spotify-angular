@@ -1,29 +1,38 @@
 <div class="side-bar">
-    <div><i class="uil uil-ellipsis-h"></i></div>
-    <ul class="side-bar__list list-one">
-        <!-- <li [routerLink]="item.router" *ngFor="let item of mainMenu.defaultOptions"> -->
-        <li (click)="goTo($event)" [routerLink]="item.router" *ngFor="let item of mainMenu.defaultOptions">
-            <div class="list-wrapper-item">
-                <i [ngClass]="['uil',item.icon]"></i>
-                <span class="side-bar__list list-label">{{item.name}}</span>
-            </div>
-        </li>
-    </ul>
-    <div class="side-bar__separator"></div>
-    <ul class="side-bar__list list-two">
-        <li *ngFor="let item of mainMenu.accessLink">
-            <div class="list-wrapper-item">
-                <i [ngClass]="['uil',item.icon]"></i>
-                <span class="side-bar__list list-label">{{item.name}}</span>
-            </div>
-        </li>
-    </ul>
-    <div class="side-bar__separator line-separator"></div>
-    <ul class="side-bar__list list-three">
-        <li *ngFor="let item of customOptions">
-            <div class="list-wrapper-item">
-                <span class="side-bar__list list-label">{{item.name}}</span>
-            </div>
-        </li>
-    </ul>
+  <div><i class="uil uil-ellipsis-h"></i></div>
+  <ul class="side-bar__list list-one">
+    <!-- <li [routerLink]="item.router" *ngFor="let item of mainMenu.defaultOptions"> -->
+    <li
+      (click)="goTo($event)"
+      [routerLink]="item.router"
+      *ngFor="let item of mainMenu.defaultOptions"
+    >
+      <div class="list-wrapper-item">
+        <i [ngClass]="['uil', item.icon]"></i>
+        <span class="side-bar__list list-label">{{ item.name }}</span>
+      </div>
+    </li>
+  </ul>
+  <div class="side-bar__separator"></div>
+  <ul class="side-bar__list list-two">
+    <ng-containers
+      [routerLink]="item.router"
+      *ngFor="let item of mainMenu.accessLink"
+    >
+      <li *ngIf="!item.onlyForAdmin || cookie.get('userRole') === 'admin'">
+        <div class="list-wrapper-item">
+          <i [ngClass]="['uil', item.icon]"></i>
+          <span class="side-bar__list list-label">{{ item.name }}</span>
+        </div>
+      </li>
+    </ng-containers>
+  </ul>
+  <div class="side-bar__separator line-separator"></div>
+  <ul class="side-bar__list list-three">
+    <li [routerLink]="item.router" *ngFor="let item of customOptions">
+      <div class="list-wrapper-item">
+        <span class="side-bar__list list-label">{{ item.name }}</span>
+      </div>
+    </li>
+  </ul>
 </div>

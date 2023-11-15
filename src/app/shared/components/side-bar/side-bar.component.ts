@@ -1,25 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css']
+  styleUrls: ['./side-bar.component.css'],
 })
 export class SideBarComponent implements OnInit {
   mainMenu: {
-    defaultOptions: Array<any>, accessLink: Array<any>
+    defaultOptions: Array<any>;
+    accessLink: Array<any>;
   } = {
     defaultOptions: [],
-    accessLink: []
-  }
-  
-  customOptions: Array<any> = []
+    accessLink: [],
+  };
 
-  constructor(private router:Router) {}
+  customOptions: Array<any> = [];
+
+  constructor(private router: Router, public cookie: CookieService) {}
 
   goTo($event: any): void {
-    console.log($event)
+    console.log($event);
   }
 
   ngOnInit(): void {
@@ -27,49 +29,55 @@ export class SideBarComponent implements OnInit {
       {
         name: 'Home',
         icon: 'uil uil-estate',
-        router: ['/']
+        router: ['/'],
       },
       {
         name: 'Buscar',
         icon: 'uil uil-search',
-        router: ['/', 'history']
+        router: ['/', 'history'],
       },
       {
         name: 'Tu biblioteca',
         icon: 'uil uil-chart',
         router: ['/', 'favorites'],
-        query: { hola: 'mundo' }
-      }
-    ]
+        query: { hola: 'mundo' },
+      },
+    ];
 
     this.mainMenu.accessLink = [
       {
         name: 'Crear lista',
-        icon: 'uil-plus-square'
+        icon: 'uil-plus-square',
       },
       {
         name: 'Canciones que te gustan',
-        icon: 'uil-heart-medical'
-      }
-    ]
+        icon: 'uil-heart-medical',
+      },
+      {
+        name: 'Admin',
+        icon: 'uil uil-setting',
+        router: ['/', 'admin'],
+        onlyForAdmin: true,
+      },
+    ];
 
     this.customOptions = [
       {
         name: 'Mi lista º1',
-        router: ['/']
+        router: ['/'],
       },
       {
         name: 'Mi lista º2',
-        router: ['/']
+        router: ['/'],
       },
       {
         name: 'Mi lista º3',
-        router: ['/']
+        router: ['/'],
       },
       {
         name: 'Mi lista º4',
-        router: ['/']
-      }
-    ]
+        router: ['/'],
+      },
+    ];
   }
 }

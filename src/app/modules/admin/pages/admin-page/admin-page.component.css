@@ -1,0 +1,32 @@
+.admin-page {
+  position: relative;
+  padding: 1.5rem;
+  padding-bottom: 10rem;
+  min-height: 100svh;
+}
+.admin-page.isLoading {
+  height: 100vh;
+  overflow: hidden;
+}
+.admin-page.isLoading::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.admin-page.isLoading::after {
+  content: "";
+  position: absolute;
+  top: calc(50svh - 50px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("../../../../../assets/images/loading.svg");
+  background-size: 100%;
+  height: 100px;
+  width: 100px;
+  background-repeat: no-repeat;
+}

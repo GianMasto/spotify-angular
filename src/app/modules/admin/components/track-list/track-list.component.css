@@ -1,0 +1,35 @@
+.track-list table {
+  width: 100%;
+}
+
+.track-list table thead {
+  border-bottom: 1px solid var(--color-4);
+}
+
+.track-list table th {
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--color-4);
+  opacity: 0.7;
+  font-weight: 400;
+  padding: 1rem 0;
+}
+
+.track-list table td {
+  padding-bottom: 0.5rem;
+}
+
+.track-list table button {
+  border: 0;
+  padding: 0.5rem;
+  background: none;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.track-list table button.edit {
+  color: var(--color-6);
+}
+.track-list table button.delete {
+  color: var(--color-7);
+}

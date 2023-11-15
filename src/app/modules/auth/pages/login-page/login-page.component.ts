@@ -37,6 +37,7 @@ export class LoginPageComponent implements OnInit {
 
       this.sessionError = false;
       this.cookie.set('token', res.tokenSession, 1, '/');
+      this.cookie.set('userRole', res.data.role, 1, '/');
 
       return this.router.navigate(['/', 'tracks']);
     });

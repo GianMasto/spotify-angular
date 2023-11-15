@@ -1,0 +1,28 @@
+<div class="track-list">
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Álbum</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let track of tracks">
+        <td>{{ track.name }}</td>
+        <td>{{ track.album }}</td>
+        <td>
+          <button (click)="editTrack(track)" class="edit">
+            <i class="uil uil-edit"></i>
+          </button>
+        </td>
+        <td>
+          <button (click)="deleteTrack(track)" class="delete">
+            <i class="uil uil-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

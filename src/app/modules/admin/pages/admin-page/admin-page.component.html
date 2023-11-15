@@ -1,0 +1,9 @@
+<div
+  class="admin-page"
+  [ngClass]="{
+    isLoading
+  }"
+>
+  <app-track-form [(isLoading)]="isLoading"></app-track-form>
+  <app-track-list [(isLoading)]="isLoading"></app-track-list>
+</div>

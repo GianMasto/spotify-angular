@@ -10,6 +10,7 @@ import { PlayListBodyComponent } from './components/play-list-body/play-list-bod
 import { RouterModule } from '@angular/router';
 import { OrderListPipe } from './pipes/order-list.pipe';
 import { ImgBrokenDirective } from './directives/img-broken.directive';
+import { RemoveRepeatedFromListPipe } from './pipes/remove-repeated-from-list.pipe';
 
 
 
@@ -24,6 +25,7 @@ import { ImgBrokenDirective } from './directives/img-broken.directive';
     PlayListBodyComponent,
     OrderListPipe,
     ImgBrokenDirective,
+    RemoveRepeatedFromListPipe,
   ],
   imports: [
     CommonModule,
