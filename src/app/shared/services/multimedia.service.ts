@@ -32,21 +32,21 @@ export class MultimediaService {
   }
 
   private setPlayerStatus = (state: any) => {
-    this.playerStatus$.next(state);
-    // switch (state.type) {
-    //   case 'play':
-    //     this.playerStatus$.next('play');
-    //     break;
-    //   case 'playing':
-    //     this.playerStatus$.next('playing');
-    //     break;
-    //   case 'ended':
-    //     this.playerStatus$.next('ended');
-    //     break;
-    //   default:
-    //     this.playerStatus$.next('paused');
-    //     break;
-    // }
+    // this.playerStatus$.next(state);
+    switch (state.type) {
+      case 'play':
+        this.playerStatus$.next('play');
+        break;
+      case 'playing':
+        this.playerStatus$.next('playing');
+        break;
+      case 'ended':
+        this.playerStatus$.next('ended');
+        break;
+      default:
+        this.playerStatus$.next('paused');
+        break;
+    }
   };
 
   private calculateTime = (): void => {
