@@ -46,14 +46,6 @@ export class SideBarComponent implements OnInit {
 
     this.mainMenu.accessLink = [
       {
-        name: 'Crear lista',
-        icon: 'uil-plus-square',
-      },
-      {
-        name: 'Canciones que te gustan',
-        icon: 'uil-heart-medical',
-      },
-      {
         name: 'Admin',
         icon: 'uil uil-setting',
         router: ['/', 'admin'],
