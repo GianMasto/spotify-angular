@@ -1,11 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { NgFor, NgClass, NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css'],
+    selector: 'app-side-bar',
+    templateUrl: './side-bar.component.html',
+    styleUrls: ['./side-bar.component.css'],
+    standalone: true,
+    imports: [
+        NgFor,
+        RouterLink,
+        NgClass,
+        NgIf,
+    ],
 })
 export class SideBarComponent implements OnInit {
   mainMenu: {

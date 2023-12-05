@@ -8,8 +8,8 @@ describe('AuthPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthPageComponent]
-    });
+    imports: [AuthPageComponent]
+});
     fixture = TestBed.createComponent(AuthPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

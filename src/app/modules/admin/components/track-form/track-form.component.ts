@@ -1,18 +1,20 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TrackModel } from '@core/models/tracks.model';
 import { TracksService } from '@modules/admin/services/tracks.service';
 
 @Component({
-  selector: 'app-track-form',
-  templateUrl: './track-form.component.html',
-  styleUrls: ['./track-form.component.css'],
+    selector: 'app-track-form',
+    templateUrl: './track-form.component.html',
+    styleUrls: ['./track-form.component.css'],
+    standalone: true,
+    imports: [ReactiveFormsModule],
 })
 export class TrackFormComponent implements OnInit {
   @Input() isLoading!: boolean;
   @Output() isLoadingChange = new EventEmitter<boolean>();
 
-  trackForm: FormGroup = new FormGroup({});
+  trackForm!: FormGroup;
   formError = false;
   mode: 'EDIT' | 'ADD' = 'ADD';
   selectedTrack!: TrackModel;

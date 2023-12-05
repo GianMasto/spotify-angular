@@ -2,11 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
 import { TracksService } from '@modules/admin/services/tracks.service';
 import Swal from 'sweetalert2';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-track-list',
-  templateUrl: './track-list.component.html',
-  styleUrls: ['./track-list.component.css'],
+    selector: 'app-track-list',
+    templateUrl: './track-list.component.html',
+    styleUrls: ['./track-list.component.css'],
+    standalone: true,
+    imports: [NgFor],
 })
 export class TrackListComponent implements OnInit {
   @Input() isLoading!: boolean;

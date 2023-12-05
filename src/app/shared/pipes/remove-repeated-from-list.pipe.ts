@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'removeRepeatedFromList',
+    name: 'removeRepeatedFromList',
+    standalone: true,
 })
 export class RemoveRepeatedFromListPipe implements PipeTransform {
   transform(array: Array<any>): Array<any> {
